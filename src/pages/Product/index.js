@@ -6,8 +6,8 @@ import axios from 'axios';
 const Product = ({navigation}) => {
   const [title] = useState('Orson');
   const [description] = useState('orson is good');
-  const [stock] = useState('100');
-  const [price] = useState('10000');
+  const [stock] = useState(100);
+  const [price] = useState(10000);
   const [image] = useState('https://picsum.photos/200/200');
 
   const addCart = () => {

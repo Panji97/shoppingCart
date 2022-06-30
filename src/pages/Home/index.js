@@ -14,9 +14,14 @@ const Home = ({navigation}) => {
 
   const getData = async () => {
     await axios('http://localhost:8081/products').then(res => {
-      console.log(res.data);
       setData(res.data);
       setQty(res.data.length);
+      // calculate total price from api
+      let total = 0;
+      res.data.forEach(item => {
+        total += item.price;
+      });
+      setPrice(total);
     });
   };
 
