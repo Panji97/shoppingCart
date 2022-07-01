@@ -1,12 +1,12 @@
 {
   "products": [
     {
-      "id": 1,
       "title": "orson",
       "description": "orson is good",
       "stock": 100,
       "price": 10000,
-      "image": "https://picsum.photos/200/200"
+      "image": "https://picsum.photos/200/200",
+      "id": 1
     },
     {
       "id": 2,
@@ -23,14 +23,6 @@
       "price": 10000,
       "image": "https://picsum.photos/200/200",
       "id": 3
-    },
-    {
-      "title": "Orson",
-      "description": "orson is good",
-      "stock": 100,
-      "price": 10000,
-      "image": "https://picsum.photos/200/200",
-      "id": 4
     }
   ],
   "carts": [],

@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import {StyleSheet, Text, View, Image} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {StyleSheet, Text, View, Image, ScrollView} from 'react-native';
 import {ButtonCustom, Header} from '../../components';
 import axios from 'axios';
 
@@ -9,6 +9,11 @@ const Product = ({navigation}) => {
   const [stock] = useState(100);
   const [price] = useState(10000);
   const [image] = useState('https://picsum.photos/200/200');
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    getData();
+  }, []);
 
   const addCart = () => {
     const data = {
@@ -24,21 +29,35 @@ const Product = ({navigation}) => {
     });
   };
 
+  const getData = () => {
+    axios.get('http://localhost:8081/products').then(res => {
+      setData(res.data);
+    });
+  };
+
   return (
     <View style={styles.containerWrapper}>
       <Header title="Product" />
-      <View style={styles.container}>
-        <View style={styles.content}>
-          <Image source={{uri: image}} style={styles.image} />
-          <Text style={styles.text}>{title}</Text>
-          <Text style={styles.description}>{description}</Text>
-          <View style={styles.textWrapper}>
-            <Text style={styles.description}>Price: Rp.{price}</Text>
-            <Text style={styles.description}>Stock: {stock}</Text>
-          </View>
-        </View>
-        <ButtonCustom title="Add to Cart" color="green" onPress={addCart} />
-      </View>
+      <ScrollView style={styles.container}>
+        {data.map((res, index) => {
+          return (
+            <View style={styles.content} key={index}>
+              <Image source={{uri: res.image}} style={styles.image} />
+              <Text style={styles.title}>{res.title}</Text>
+              <Text style={styles.description}>{res.description}</Text>
+              <View style={styles.textWrapper}>
+                <Text style={styles.description}>Stock {res.stock}</Text>
+                <Text style={styles.description}>Rp. {res.price}</Text>
+              </View>
+              <ButtonCustom
+                title="Add to Cart"
+                color="green"
+                onPress={addCart}
+              />
+            </View>
+          );
+        })}
+      </ScrollView>
     </View>
   );
 };
@@ -63,7 +82,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginBottom: 20,
   },
-  text: {
+  title: {
     color: '#000',
     fontWeight: 'bold',
     fontSize: 20,

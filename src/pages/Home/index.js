@@ -1,10 +1,10 @@
-import {Button, ScrollView, StyleSheet, Text, View} from 'react-native';
+import {ScrollView, StyleSheet, View} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {Content, Footer, Header} from '../../components';
 import axios from 'axios';
 
 const Home = ({navigation}) => {
-  const [qty, setQty] = useState(1);
+  const [qty, setQty] = useState(null);
   const [price, setPrice] = useState(0);
   const [data, setData] = useState([]);
 
@@ -16,7 +16,6 @@ const Home = ({navigation}) => {
     await axios('http://localhost:8081/products').then(res => {
       setData(res.data);
       setQty(res.data.length);
-      // calculate total price from api
       let total = 0;
       res.data.forEach(item => {
         total += item.price;

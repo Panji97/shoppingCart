@@ -1,14 +1,6 @@
 import React, {useState, useEffect} from 'react';
-import {StyleSheet, Text, View, Image} from 'react-native';
-import {Dummy} from '../../assets';
-import {
-  ButtonCustom,
-  ButtonSmall,
-  Gap,
-  Header,
-  InputCustom,
-  Photo,
-} from '../../components';
+import {StyleSheet, View} from 'react-native';
+import {ButtonCustom, Gap, Header, InputCustom} from '../../components';
 import axios from 'axios';
 
 const ProductUpdate = ({navigation, route}) => {
@@ -63,13 +55,13 @@ const ProductUpdate = ({navigation, route}) => {
         />
         <InputCustom
           title="Stock"
-          value={stock}
+          value={toString(stock)}
           onChangeText={value => setStock(value)}
           keyboardType="number-pad"
         />
         <InputCustom
           title="Price"
-          value={price}
+          value={toString(price)}
           onChangeText={value => setPrice(value)}
           keyboardType="number-pad"
         />
